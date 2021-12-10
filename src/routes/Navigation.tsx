@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Switch, Route, NavLink } from 'react-router-dom';
-import { ShoppingPage } from '../02-component-patterns/pages/ShoppingPage';
+import { ShoppingPage } from '../03-component-control-props/pages/ShoppingPage';
 import logo from '../logo.svg';
 
 export const Navigation = () => {
