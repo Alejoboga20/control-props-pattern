@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ProductButtons, ProductCard, ProductImage, ProductTitle } from '../components';
-import { Product } from '../interfaces/interfaces';
+import { Product, onChangeArgs } from '../interfaces/interfaces';
 import '../styles/custom-styles.css';
 
 const product1 = {
@@ -24,8 +24,8 @@ interface ProductInCart extends Product {
 export const ShoppingPage = () => {
 	const [shoppingCart, setShoppingCart] = useState<{ [key: string]: ProductInCart }>({});
 
-	const onProductCountChange = () => {
-		console.log('product change');
+	const onProductCountChange = ({ counter, product }: onChangeArgs) => {
+		console.log({ counter, product });
 	};
 
 	return (
@@ -45,7 +45,7 @@ export const ShoppingPage = () => {
 						key={product.id}
 						product={product}
 						className='bg-dark text-white'
-						onChange={() => onProductCountChange()}
+						onChange={onProductCountChange}
 					>
 						<ProductImage className='custom-image' />
 						<ProductTitle className='text-bold' />
@@ -55,12 +55,7 @@ export const ShoppingPage = () => {
 			</div>
 
 			<div className='shoping-cart'>
-				<ProductCard
-					product={product2}
-					className='bg-dark text-white'
-					style={{ width: '100px' }}
-					onChange={() => onProductCountChange()}
-				>
+				<ProductCard product={product2} className='bg-dark text-white' style={{ width: '100px' }}>
 					<ProductImage className='custom-image' />
 					<ProductButtons className='custom-buttons' />
 				</ProductCard>

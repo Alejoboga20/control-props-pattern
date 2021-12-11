@@ -21,3 +21,8 @@ export interface Product {
 	title: string;
 	img?: string;
 }
+
+export interface onChangeArgs {
+	product: Product;
+	counter: number;
+}
