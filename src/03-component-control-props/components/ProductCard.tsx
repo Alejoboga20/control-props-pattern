@@ -7,8 +7,14 @@ export const ProductContext = createContext({} as ProductContextProps);
 
 const { Provider } = ProductContext;
 
-export const ProductCard = ({ children, product, className, style }: ProductCardProps) => {
-	const { counter, increaseBy } = useProduct();
+export const ProductCard = ({
+	children,
+	onChange,
+	product,
+	className,
+	style,
+}: ProductCardProps) => {
+	const { counter, increaseBy } = useProduct(onChange);
 
 	return (
 		<Provider value={{ counter, increaseBy, product }}>
@@ -22,6 +28,7 @@ export const ProductCard = ({ children, product, className, style }: ProductCard
 export interface ProductCardProps {
 	children?: ReactElement | ReactElement[];
 	className?: string;
+	onChange?: () => void;
 	product: Product;
 	style?: CSSProperties;
 }
