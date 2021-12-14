@@ -26,7 +26,26 @@ export const ShoppingPage = () => {
 
 	const onProductCountChange = ({ counter, product }: onChangeArgs) => {
 		setShoppingCart((oldShoppingCard) => {
-			if (counter === 0) {
+			const productInCart: ProductInCart = oldShoppingCard[product.id] || {
+				...product,
+				count: 0,
+			};
+
+			if (Math.max(productInCart.count + counter, 0) > 0) {
+				productInCart.count += counter;
+
+				return {
+					...oldShoppingCard,
+					[product.id]: productInCart,
+				};
+			}
+
+			//Delete product
+			const { [product.id]: toDelete, ...rest } = oldShoppingCard;
+
+			return { ...rest };
+
+			/* if (counter === 0) {
 				const { [product.id]: toDelete, ...rest } = oldShoppingCard;
 				console.log(toDelete);
 
@@ -36,7 +55,7 @@ export const ShoppingPage = () => {
 			return {
 				...oldShoppingCard,
 				[product.id]: { ...product, count: counter },
-			};
+			}; */
 		});
 	};
 
